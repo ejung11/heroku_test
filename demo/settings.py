@@ -8,6 +8,13 @@ SESSION_CONFIGS = [
         app_sequence=['guess_two_thirds', 'payment_info'],
         num_demo_participants=3,
     ),
+
+    dict(name='Ian_public_goods_game',
+        display_name="Ian's public goods game",
+        app_sequence=['ian_public_good_game', 'payment_info'],
+        num_demo_participants=3,
+
+    ),
     dict(
         name='survey', app_sequence=['survey', 'payment_info'], num_demo_participants=1
     ),
