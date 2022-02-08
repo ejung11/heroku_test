@@ -29,7 +29,6 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     MPCR = models.FloatField()
     total_contribution = models.CurrencyField()
-    individual_share = models.CurrencyField()
 
 
 class Player(BasePlayer):
@@ -58,20 +57,20 @@ def creating_session(subsession):
 
 
 def set_payoffs(g: Group):
-    players = g.get_players()
-    contributions = [p.contribution for p in players]
-    g.total_contribution = sum(contributions)
-    g.individual_share = (
-        g.total_contribution * g.MPCR / Constants.players_per_group
-    )
-    for p in players:
-        p.payoff = Constants.ENDOWMENT - p.contribution + g.individual_share
-        p.participant.vars['totalEarnings'] += p.payoff
+    g.total_contribution = 0
+    for p in g.get_players():
+        g.total_contribution += p.contribution
+
+    for p in g.get_players():
         print('payoff', p.participant.payoff)
         print('endowment', Constants.ENDOWMENT)
         print('contribution', p.contribution)
         print('total contribution', g.total_contribution)
         print('MPCR', g.MPCR)
+
+        p.participant.payoff = float(Constants.ENDOWMENT - p.contribution + g.total_contribution*g.MPCR)
+        p.participant.vars['totalEarnings'] += p.participant.payoff
+
         print('total earnings', p.participant.vars['totalEarnings'])
 
 
