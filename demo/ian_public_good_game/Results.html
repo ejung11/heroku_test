@@ -3,11 +3,11 @@
 
     <p>
         You started with an endowment of {{ Constants.ENDOWMENT }},
-        of which you contributed {{ p.contribution}}.
+        of which you contributed {{ player.contribution}}.
         Your group contributed {{ group.total_contribution }},
-        resulting in an individual share of {{ group.individual_share }}.
-        Your profit in this round is {{ p.payoff }}.
-        Your accumulated earning is {{p.participant.vars['totalEarnings']}}
+        resulting in an individual share of .
+        Your profit in this round is {{ player.payoff }}.
+        Your accumulated earning is {{player.participant.vars.totalEarnings}}
     </p>
 
     {{ next_button }}

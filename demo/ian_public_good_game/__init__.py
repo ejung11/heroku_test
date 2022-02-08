@@ -74,14 +74,22 @@ def set_payoffs(g: Group):
         print('total earnings', p.participant.vars['totalEarnings'])
 
 
+
+
 # PAGES
 class Contribute(Page):
     form_model = 'player'
     form_fields = ['contribution']
 
+    # def vars_for_template(player):
+    #     a = 5 * 10
+    #     return dict(
+    #         a=a,
+    #         b=1 + 1,
+    #     )
 
 class ResultsWaitPage(WaitPage):
-    after_all_players_arrive = set_payoffs
+    after_all_players_arrive = 'set_payoffs'
 
 
 class Results(Page):
