@@ -18,8 +18,8 @@ class Constants(BaseConstants):
     players_per_group = 3
     num_rounds = 2
     ENDOWMENT = 100
-    MPCR1 = 0.5
-    MPCR2 = 1.5
+    #testing list of MPCR
+    MPCR_list = [0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2]
 
 
 class Subsession(BaseSubsession):
@@ -38,6 +38,7 @@ class Player(BasePlayer):
 
 
 # FUNCTIONS
+import random
 def creating_session(subsession):
     print('in creating session')
     # Establish a total earnings variable for each participant
@@ -46,14 +47,16 @@ def creating_session(subsession):
         if subsession.round_number == 1:
             p.participant.vars['totalEarnings'] = 0
 
+
     # Assign varying MPCR
     for g in subsession.get_groups():
         print('round', subsession.round_number)
         print('num_rounds/2', int(Constants.num_rounds/2))
         if subsession.round_number <= int(Constants.num_rounds/2):
-            g.MPCR = Constants.MPCR1
+            g.MPCR = random.choice(Constants.MPCR_list)
         else:
-            g.MPCR = Constants.MPCR2
+            g.MPCR = random.choice(Constants.MPCR_list)
+
 
 
 def set_payoffs(g: Group):
